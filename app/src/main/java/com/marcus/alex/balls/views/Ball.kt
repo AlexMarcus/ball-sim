@@ -24,8 +24,8 @@ class Ball(
         paint.color = color
     }
 
-    fun move(canvas: Canvas) {
-        position += velocity
+    fun move(dt: Double, canvasRect: Rect) {
+        position += velocity * dt
 
         val x = position.x
         val y = position.y
@@ -37,15 +37,13 @@ class Ball(
 
         //Do we need to bounce next time?
         val bounds = Rect()
-        oval?.roundOut(bounds) ///store our int bounds
+        oval?.roundOut(bounds) //store our int bounds
 
-
-
-        if (!canvas.clipBounds.contains(bounds)) {
+        if (!canvasRect.contains(bounds)) {
             val ballMinX: Double = radius
             val ballMinY: Double = radius
-            val ballMaxX: Double = canvas.width - radius
-            val ballMaxY: Double = canvas.height - radius
+            val ballMaxX: Double = canvasRect.width() - radius
+            val ballMaxY: Double = canvasRect.height() - radius
             if (position.x < ballMinX) {
                 velocity.x *= -1
                 position.x = ballMinX // Re-position the ball at the edge

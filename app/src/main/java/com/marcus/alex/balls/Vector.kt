@@ -50,3 +50,5 @@ data class Vector @JvmOverloads constructor(
 operator fun Double.times(vector: Vector) = vector.times(this)
 
 operator fun Double.div(vector: Vector) = vector.div(this)
+
+fun vectorOf(x: Double, y:Double) = Vector(x, y)
